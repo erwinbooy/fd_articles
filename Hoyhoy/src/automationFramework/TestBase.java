@@ -19,7 +19,7 @@ public abstract class TestBase extends TestCase{
 //		myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
 //		myDriver.setJavascriptEnabled(true);
 		myDriver.manage().window().maximize();
-		myDriver.get("http://www.hoyhoy.nl");
+		myDriver.get("https://www.hoyhoy.nl");
 		try{
 			Thread.sleep(3000);
 		} catch (Exception e){
