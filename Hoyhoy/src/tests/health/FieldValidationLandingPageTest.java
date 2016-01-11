@@ -7,9 +7,9 @@ import pages.health.CoveragesPage;
 import pages.health.LandingPage;
 import profiles.BirthDate;
 import profiles.Gender;
+import profiles.GenderMale;
 import profiles.PostalCode;
 import util.BirthDateHelper;
-import util.GenderHelper;
 import automationFramework.PageProvider;
 import automationFramework.TestBase;
 
@@ -29,7 +29,7 @@ public class FieldValidationLandingPageTest extends TestBase{
 
 		// Now we are on the landing page we click on the Gender
 		LandingPage landingPage = PageProvider.getLandingPage();
-		Gender myGender = GenderHelper.getMale();
+		Gender myGender = new GenderMale();
 		landingPage.clickGender(myGender);
 
 		// Now we will Validate the BirthDate
