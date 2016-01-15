@@ -33,12 +33,12 @@ public class GetArticleFromFD extends TestBase {
 
 		// Now we have the Urls we can use it to search on Google
 		GoogleSearchPage googlePage = PageProvider.getGoogleSearchPage();
-		googlePage.openPage();
 
-		// Loop through all articles and fine them in google
+		// Loop through all articles and find them in google and write them to a file
 		Iterator<Article> iter = myArticles.iterator();
 		while(iter.hasNext()){
 			Article a = iter.next();
+			googlePage.openPage();
 			googlePage.searchGoogle(a.getArticleUrl());
 			googlePage.clickFirstResult();
 			a.setArticleText(fdPage.getArticleText());

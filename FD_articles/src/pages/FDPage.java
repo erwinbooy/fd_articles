@@ -42,8 +42,8 @@ public class FDPage extends AbstractPage {
 		// Define our arraylist where we will store everything
 		ArrayList<Article> myArticles = new ArrayList<>();
 		
-		// Get all the article Url's and add them to the array
-		for(int i=1;i<10;i++){
+		// Get the latest 5 articles and put them in the array
+		for(int i=1;i<19;i++){
 			Article a = new Article();
 			a.setArticleUrl(getArticleUrl(i));
 			myArticles.add(a);
@@ -71,6 +71,7 @@ public class FDPage extends AbstractPage {
 	public String getArticleText(){
 		WebElement myElement = waitForElementPresent(xArticle + xArticleText);
 		String myText = myElement.getText();
+		driver.manage().deleteAllCookies();
 		return myText;
 	}
 	

@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 public class ArticleWriter {
 
