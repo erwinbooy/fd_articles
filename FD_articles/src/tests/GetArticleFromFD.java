@@ -1,5 +1,6 @@
 package tests;
 
+import java.sql.Driver;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,7 +36,9 @@ public class GetArticleFromFD extends TestBase {
 		GoogleSearchPage googlePage = PageProvider.getGoogleSearchPage();
 
 		// Loop through all articles and find them in google and write them to a file
+		// Since google only allows 5 free articles we have to clear our cookies to start fresh again
 		Iterator<Article> iter = myArticles.iterator();
+		int counter = 0;
 		while(iter.hasNext()){
 			Article a = iter.next();
 			googlePage.openPage();
@@ -44,6 +47,11 @@ public class GetArticleFromFD extends TestBase {
 			a.setArticleText(fdPage.getArticleText());
 			a.setArticleTitle(fdPage.getArticleTitle());
 			ArticleWriter.writeArticle(a);
+			counter++;
+			if (counter==5){
+				googlePage.driver.manage().deleteAllCookies();
+				counter = 0;
+			}
 		}
 	}
 }

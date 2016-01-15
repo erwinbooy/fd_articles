@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ArticleWriter {
 
+	// Make sure this directory exists on your drive
 	private static String articleDirectory = "D:/FD Articles/";
 	
 	/**

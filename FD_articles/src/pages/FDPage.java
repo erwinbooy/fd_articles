@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import automationFramework.AbstractPage;
 import utils.Article;
 
 public class FDPage extends AbstractPage {
@@ -71,7 +72,6 @@ public class FDPage extends AbstractPage {
 	public String getArticleText(){
 		WebElement myElement = waitForElementPresent(xArticle + xArticleText);
 		String myText = myElement.getText();
-		driver.manage().deleteAllCookies();
 		return myText;
 	}
 	
