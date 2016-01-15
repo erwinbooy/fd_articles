@@ -33,7 +33,7 @@ public class GoogleSearchPage extends AbstractPage {
 	public void clickFirstResult() {
 		// We have to make sure the element is on the page
 		WebElement firstResult = getClickableElementByXPath("//h3/a");
-		//String myText = firstResult.getText();
+		// String myText = firstResult.getText();
 		firstResult.click();
 	}
 

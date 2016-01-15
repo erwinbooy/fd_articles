@@ -1,6 +1,5 @@
 package tests;
 
-import java.sql.Driver;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,7 +25,8 @@ public class GetArticleFromFD extends TestBase {
 		// Define the Articles
 		List<Article> myArticles = null;
 
-		// First we go to the Financieel Dagblad page where we get a url's from the
+		// First we go to the Financieel Dagblad page where we get a url's from
+		// the
 		// Articles
 		FDPage fdPage = PageProvider.getFinancieelDagbladPage();
 		fdPage.OpenPage();
@@ -35,11 +35,13 @@ public class GetArticleFromFD extends TestBase {
 		// Now we have the Urls we can use it to search on Google
 		GoogleSearchPage googlePage = PageProvider.getGoogleSearchPage();
 
-		// Loop through all articles and find them in google and write them to a file
-		// Since google only allows 5 free articles we have to clear our cookies to start fresh again
+		// Loop through all articles and find them in google and write them to a
+		// file
+		// Since google only allows 5 free articles we have to clear our cookies
+		// to start fresh again
 		Iterator<Article> iter = myArticles.iterator();
 		int counter = 0;
-		while(iter.hasNext()){
+		while (iter.hasNext()) {
 			Article a = iter.next();
 			googlePage.openPage();
 			googlePage.searchGoogle(a.getArticleUrl());
@@ -48,7 +50,7 @@ public class GetArticleFromFD extends TestBase {
 			a.setArticleTitle(fdPage.getArticleTitle());
 			ArticleWriter.writeArticle(a);
 			counter++;
-			if (counter==5){
+			if (counter == 5) {
 				googlePage.driver.manage().deleteAllCookies();
 				counter = 0;
 			}

@@ -26,23 +26,26 @@ public abstract class AbstractPage {
 		this.driver = driver;
 		this.wait = wait;
 	}
-	
+
 	/**
-	 * This method will be a safe method to get an element because it always waits for it
-	 * to be clickable
+	 * This method will be a safe method to get an element because it always
+	 * waits for it to be clickable
+	 * 
 	 * @param myXPath
 	 * @return
 	 */
-	public WebElement getClickableElementByXPath(String myXPath){
+	public WebElement getClickableElementByXPath(String myXPath) {
 		return wait.until(ExpectedConditions.elementToBeClickable((By.xpath(myXPath))));
 	}
-	
+
 	/**
-	 * This method will be a safe method to check if an element is present on the page
+	 * This method will be a safe method to check if an element is present on
+	 * the page
+	 * 
 	 * @param myXPath
 	 * @return
 	 */
-	public WebElement waitForElementPresent(String myXPath){
+	public WebElement waitForElementPresent(String myXPath) {
 		return wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath(myXPath))));
 	}
 }
