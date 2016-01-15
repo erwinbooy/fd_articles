@@ -18,7 +18,7 @@ public class ArticleWriter {
 		String fileName = myArticle.getArticleTitle().replace(":", "-");
 
 		try {
-			writer = new PrintWriter(articleDirectory + myArticle.getArticleTitle() + ".html");
+			writer = new PrintWriter(articleDirectory + fileName + ".html");
 			writer.write("<head><link rel='stylesheet' href='fd.css'></head><body>");
 			writer.write(myArticle.getArticleText());
 			writer.write("</body>");
