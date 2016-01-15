@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
  * @author Erwin
  *
  * Abstract class that performs the standard stuff that a Page needs
- * It implements the HoyhoyPage interface
  */
 public abstract class HoyhoyAbstractPage{
 	
