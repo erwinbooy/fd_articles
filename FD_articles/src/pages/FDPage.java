@@ -62,8 +62,11 @@ public class FDPage extends AbstractPage {
 	 */
 	public String getArticleUrl(int articleNbr) {
 		// Get the first article
+		logger.info("Trying to find the Article URL from the page");
 		WebElement myElement = waitForElementPresent(By.xpath(xArticle + "[" + articleNbr + "]" + xArticleLink));
+		logger.info("Found the Article URL from the page");
 		String myArticleUrl = myElement.getAttribute("href");
+		logger.info("Got the Article URL from the page: " + myArticleUrl);
 		return myArticleUrl;
 	}
 
@@ -73,8 +76,11 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleText() {
+		logger.info("Trying to find the Article Text from the page");
 		WebElement myElement = waitForElementPresent(By.xpath(xArticle));
+		logger.info("Found the Article text on the page");
 		String myText = myElement.getAttribute("innerHTML");
+		logger.info("Got the Article Text now");
 		return myText;
 	}
 
