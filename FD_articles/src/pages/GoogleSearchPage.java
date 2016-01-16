@@ -24,16 +24,16 @@ public class GoogleSearchPage extends AbstractPage {
 
 	// This method will use the input string and search Google
 	public void searchGoogle(String searchQuery) {
-		WebElement googleSearchBox = driver.findElement(By.id("lst-ib"));
+		WebElement googleSearchBox = waitForElementPresent(By.id("lst-ib"));
 		googleSearchBox.sendKeys(searchQuery);
 		WebElement googleSearchButton = driver.findElement(By.id("sblsbb"));
 		googleSearchButton.submit();
 	}
 
 	public void clickFirstResult() {
-		// We have to make sure the element is on the page
-		WebElement firstResult = getClickableElementByXPath("//h3/a");
-		// String myText = firstResult.getText();
+		// We have to make sure the element is on the pagew
+		WebElement firstResult = waitForElementPresent(By.xpath("//h3/a"));
+		//String myText = firstResult.getText();
 		firstResult.click();
 	}
 

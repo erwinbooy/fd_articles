@@ -34,8 +34,8 @@ public abstract class AbstractPage {
 	 * @param myXPath
 	 * @return
 	 */
-	public WebElement getClickableElementByXPath(String myXPath) {
-		return wait.until(ExpectedConditions.elementToBeClickable((By.xpath(myXPath))));
+	public WebElement waitForElementIsClickable(By locator) {
+		return wait.until(ExpectedConditions.elementToBeClickable((locator)));
 	}
 
 	/**
@@ -45,7 +45,7 @@ public abstract class AbstractPage {
 	 * @param myXPath
 	 * @return
 	 */
-	public WebElement waitForElementPresent(String myXPath) {
-		return wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath(myXPath))));
+	public WebElement waitForElementPresent(By locator) {
+		return wait.until(ExpectedConditions.presenceOfElementLocated((locator)));
 	}
 }

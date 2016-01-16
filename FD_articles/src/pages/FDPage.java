@@ -16,7 +16,6 @@ public class FDPage extends AbstractPage {
 	private String myPageUrl = "http://fd.nl/beurs";
 	private String xArticle = "//article";
 	private String xArticleLink = "/a";
-	private String xArticleText = "//div[contains(@class,'body')]";
 	private String xArticleTitle = "//h1";
 
 	/**
@@ -63,7 +62,7 @@ public class FDPage extends AbstractPage {
 	 */
 	public String getArticleUrl(int articleNbr) {
 		// Get the first article
-		WebElement myElement = waitForElementPresent(xArticle + "[" + articleNbr + "]" + xArticleLink);
+		WebElement myElement = waitForElementPresent(By.xpath(xArticle + "[" + articleNbr + "]" + xArticleLink));
 		String myArticleUrl = myElement.getAttribute("href");
 		return myArticleUrl;
 	}
@@ -74,7 +73,7 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleText() {
-		WebElement myElement = waitForElementPresent(xArticle);
+		WebElement myElement = waitForElementPresent(By.xpath(xArticle));
 		String myText = myElement.getAttribute("innerHTML");
 		return myText;
 	}
