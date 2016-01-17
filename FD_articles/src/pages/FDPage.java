@@ -17,6 +17,7 @@ public class FDPage extends AbstractPage {
 	private String xArticle = "//article";
 	private String xArticleLink = "/a";
 	private String xArticleTitle = "//h1";
+	private String xArticleDate = "//time";
 
 	/**
 	 * Constructor from the Abstract Class
@@ -24,8 +25,8 @@ public class FDPage extends AbstractPage {
 	 * @param driver
 	 * @param wait
 	 */
-	public FDPage(WebDriver driver, WebDriverWait wait) {
-		super(driver, wait);
+	public FDPage(WebDriver driver) {
+		super(driver);
 	}
 
 	/**
@@ -63,9 +64,7 @@ public class FDPage extends AbstractPage {
 	public String getArticleUrl(int articleNbr) {
 		// Get the first article
 		logger.info("Trying to find the Article URL from the page");
-		WebElement myElement = waitForElementPresent(By.xpath(xArticle + "[" + articleNbr + "]" + xArticleLink));
-		logger.info("Found the Article URL from the page");
-		String myArticleUrl = myElement.getAttribute("href");
+		String myArticleUrl = driver.findElement(By.xpath(xArticle + "[" + articleNbr + "]" + xArticleLink)).getAttribute("href");
 		logger.info("Got the Article URL from the page: " + myArticleUrl);
 		return myArticleUrl;
 	}
@@ -76,7 +75,7 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleText() {
-		logger.info("Trying to find the Article Text from the page");
+		logger.info("Trying to find the Article Text on the page");
 		WebElement myElement = waitForElementPresent(By.xpath(xArticle));
 		logger.info("Found the Article text on the page");
 		String myText = myElement.getAttribute("innerHTML");
@@ -90,9 +89,23 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleTitle() {
-		WebElement myElement = driver.findElement(By.xpath(xArticle + xArticleTitle));
-		String myText = myElement.getText();
-		return myText;
+		logger.info("Trying to find the Article Title on the page");
+		String myTitle = driver.findElement(By.xpath(xArticle + xArticleTitle)).getText();
+		logger.info("Got the Article Title now");
+		return myTitle;
 	}
 
+	/**
+	 * Get the Date of the article
+	 * 
+	 * @return
+	 */
+	public String getArticleDate() {
+		logger.info("Trying to find the Article Date on the page");
+		WebElement myElement = driver.findElement(By.xpath(xArticle + xArticleDate));
+		logger.info("Found the Article Date on the page");
+		String myDate = myElement.getText();
+		logger.info("Got the Article Date : " + myDate);
+		return myDate;
+	}
 }

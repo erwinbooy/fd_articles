@@ -48,6 +48,7 @@ public class GetArticleFromFD extends TestBase {
 			googlePage.clickFirstResult();
 			a.setArticleText(fdPage.getArticleText());
 			a.setArticleTitle(fdPage.getArticleTitle());
+			a.setArticleDate(fdPage.getArticleDate());
 			ArticleWriter.writeArticle(a);
 			counter++;
 			if (counter == 5) {

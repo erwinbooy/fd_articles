@@ -2,15 +2,16 @@ package automationFramework;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 import junit.framework.TestCase;
 
 public abstract class TestBase extends TestCase {
 
 	private WebDriver myDriver;
-	private WebDriverWait waiter;
-	// private HtmlUnitDriver myDriver;
 
 	/**
 	 * @param String
@@ -18,18 +19,12 @@ public abstract class TestBase extends TestCase {
 	 * @throws Exception
 	 */
 	public void setUp() {
-		myDriver = new FirefoxDriver();
-		// myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
+		//myDriver = new FirefoxDriver();
+		myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
 		// myDriver.setJavascriptEnabled(true);
 		myDriver.manage().window().maximize();
-		waiter = new WebDriverWait(myDriver, 5);
-		try {
-			Thread.sleep(3000);
-		} catch (Exception e) {
-			// do nothing
-		}
 		// wait for the page to show
-		PageProvider.initialize(myDriver, waiter);
+		PageProvider.initialize(myDriver);
 	}
 
 	/**
@@ -39,15 +34,6 @@ public abstract class TestBase extends TestCase {
 	 */
 	public WebDriver getDriver() {
 		return myDriver;
-	}
-
-	/**
-	 * Return the waiter that can be used for the pages
-	 * 
-	 * @return
-	 */
-	public WebDriverWait getWaiter() {
-		return waiter;
 	}
 
 	/**

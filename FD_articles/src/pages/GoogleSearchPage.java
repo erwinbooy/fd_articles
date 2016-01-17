@@ -6,13 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import automationFramework.AbstractPage;
+import utils.Article;
+import utils.ArticleWriter;
 
 public class GoogleSearchPage extends AbstractPage {
 
 	private static String myUrl = "https://www.google.nl";
 
-	public GoogleSearchPage(WebDriver driver, WebDriverWait wait) {
-		super(driver, wait);
+	public GoogleSearchPage(WebDriver driver) {
+		super(driver);
 	}
 
 	/**
@@ -24,10 +26,21 @@ public class GoogleSearchPage extends AbstractPage {
 
 	// This method will use the input string and search Google
 	public void searchGoogle(String searchQuery) {
-		WebElement googleSearchBox = waitForElementPresent(By.id("lst-ib"));
-		googleSearchBox.sendKeys(searchQuery);
-		WebElement googleSearchButton = driver.findElement(By.id("sblsbb"));
-		googleSearchButton.submit();
+		logger.info("Find the google search box");
+		
+		Article a = new Article();
+		String test = driver.getPageSource();
+		a.setArticleText(test);
+		a.setArticleTitle("google_page");
+		ArticleWriter.writeArticle(a);
+		driver.findElement(By.name("q")).sendKeys(searchQuery);
+		//WebElement googleSearchBox = waitForElementPresent(By.id("lst-ib"));
+		logger.info("Found the google search box");
+		//googleSearchBox.sendKeys(searchQuery);
+		logger.info("Sent the search query to the box : " + searchQuery);
+		driver.findElement(By.id("sblsbb")).submit();
+		//WebElement googleSearchButton = driver.findElement(By.id("sblsbb"));
+		//googleSearchButton.submit();
 	}
 
 	public void clickFirstResult() {

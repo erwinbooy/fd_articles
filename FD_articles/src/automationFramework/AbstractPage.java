@@ -25,9 +25,9 @@ public abstract class AbstractPage {
 	 * 
 	 * @param driver
 	 */
-	public AbstractPage(WebDriver driver, WebDriverWait wait) {
+	public AbstractPage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = wait;
+		//this.wait = new WebDriverWait(driver, 5, 1);
 		logger = LogFactory.getLog(this.getClass());
 	}
 
