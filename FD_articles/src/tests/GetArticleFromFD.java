@@ -1,7 +1,12 @@
 package tests;
 
+import java.awt.BorderLayout;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,6 +34,7 @@ public class GetArticleFromFD extends TestBase {
 	public void test() throws InterruptedException {
 
 		logger = LogFactory.getLog(this.getClass());
+		showMessage("The program will start running now. It might take a while to scan FD for new articles");
 		
 		// Get all the current Articles from our database
 		dbArticles = ArticleDatabase.getAllArticlesFromDatabase();
@@ -55,7 +61,9 @@ public class GetArticleFromFD extends TestBase {
 			String articleUrl = iter.next();
 			// We first check if the article already exists. If so we don't go to Google
 			if (!articleExistsInDB(articleUrl)){
-				logger.info("New article found: " + articleUrl);
+				//logger.info("New article found: " + articleUrl);
+				showMessage("New article found: " + articleUrl);
+				
 				// We don't have the article yet so we are going to search for it on Google
 				googlePage.openPage();
 				googlePage.searchGoogle(articleUrl);
@@ -69,16 +77,37 @@ public class GetArticleFromFD extends TestBase {
 					ArticleWriter.writeArticle(a);
 					
 					counter++;
-					if (counter == 5) {
-						//googlePage.driver.manage().deleteAllCookies();
-						counter = 0;
-					}
 				} catch (Exception e){
+					showMessage("An unexpected error occurred !! Error is : " + e.toString());
 					logger.error(e);
 				}
 			}
 		}
+		showMessage("The program ended and found : " + counter + " new articles. You can view these articles in the folder D:/FD Articles/");
 	}
+	
+	/**
+	 * This method will show a window about some progress
+	 * @param myMessaage
+	 */
+	private void showMessage(String myMessage){
+		//1. Create the frame.
+		JFrame frame = new JFrame("Program Update");
+
+		//2. Optional: What happens when the frame closes?
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		//3. Create components and put them in the frame.
+		JLabel label = new JLabel(myMessage);
+		//...create emptyLabel...
+		frame.getContentPane().add(label, BorderLayout.CENTER);
+
+		//4. Size the frame.
+		frame.pack();
+
+		JOptionPane.showMessageDialog(frame, myMessage);
+	}
+	
 	
 	/**
 	 * Method to check if the article already exists in the DB
