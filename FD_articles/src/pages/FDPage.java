@@ -2,11 +2,8 @@ package pages;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import automationFramework.AbstractPage;
 
 public class FDPage extends AbstractPage {
@@ -21,7 +18,6 @@ public class FDPage extends AbstractPage {
 	 * Constructor from the Abstract Class
 	 * 
 	 * @param driver
-	 * @param wait
 	 */
 	public FDPage(WebDriver driver) {
 		super(driver);
@@ -40,14 +36,12 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public List<String> getAllArticleUrlsFromPage() {
-		// Define our arraylist where we will store everything
 		ArrayList<String> myArticles = new ArrayList<>();
 
-		// Get the latest 5 articles and put them in the array
-		for (int i = 1; i < 19; i++) {
+		// Get all the articleUrls from the page and put them in the array
+		for (int i = 1; i < 20; i++) {
 			myArticles.add(getArticleUrl(i));
 		}
-
 		return myArticles;
 	}
 
@@ -55,54 +49,42 @@ public class FDPage extends AbstractPage {
 	 * Get the url of the Article Note that there are 20 Articles on the page so
 	 * the max is 20!
 	 * 
-	 * @return
+	 * @return String with all articleUrls
 	 */
 	public String getArticleUrl(int articleNbr) {
-		// Get the first article
-		//logger.info("Trying to find the Article URL from the page");
-		String myArticleUrl = driver.findElement(By.xpath(xArticle + "[" + articleNbr + "]" + xArticleLink)).getAttribute("href");
-		//logger.info("Got the Article URL from the page: " + myArticleUrl);
-		return myArticleUrl;
+		// We don't have to use the wait here because this method is only called after
+		// the page initialization
+		return driver.findElement(By.xpath(xArticle + "[" + articleNbr + "]" + xArticleLink)).getAttribute("href");
 	}
 
 	/**
 	 * Get the Article of the Text
 	 * 
-	 * @return
+	 * @return String with the full page source of the article
 	 */
 	public String getArticleText() {
-		//logger.info("Trying to find the Article Text on the page");
-		//String test = driver.getPageSource();
-		//WebElement myElement = waitForElementPresent(By.xpath(xArticle));
-		//logger.info("Found the Article text on the page");
-		String myText = driver.getPageSource();
-		//logger.info("Got the Article Text now");
-		return myText;
+		return driver.getPageSource();
 	}
 
 	/**
 	 * Get the Title of the article
 	 * 
-	 * @return
+	 * @return String with the title of the article (FD defined)
 	 */
 	public String getArticleTitle() {
-		//logger.info("Trying to find the Article Title on the page");
-		String myTitle = driver.findElement(By.xpath(xArticle + xArticleTitle)).getText();
-		//logger.info("Got the Article Title now");
-		return myTitle;
+		// We don't have to use the wait method here because we only call this
+		// method after the getText and that one already waits
+		return driver.findElement(By.xpath(xArticle + xArticleTitle)).getText();
 	}
 
 	/**
 	 * Get the Date of the article
 	 * 
-	 * @return
+	 * @return String with the date of the article
 	 */
 	public String getArticleDate() {
-		//logger.info("Trying to find the Article Date on the page");
-		WebElement myElement = driver.findElement(By.xpath(xArticle + xArticleDate));
-		//logger.info("Found the Article Date on the page");
-		String myDate = myElement.getText();
-		//logger.info("Got the Article Date : " + myDate);
-		return myDate;
+		// We don't have to use the wait method here because we only call this
+		// method after the getText and that one already waits
+		return driver.findElement(By.xpath(xArticle + xArticleDate)).getText();
 	}
 }

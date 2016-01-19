@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import automationFramework.AbstractPage;
 
 public class GoogleSearchPage extends AbstractPage {
@@ -21,36 +20,38 @@ public class GoogleSearchPage extends AbstractPage {
 		driver.get(myUrl);
 	}
 
-	// This method will use the input string and search Google
+	/**
+	 * This method will perform a search on Google
+	 * 
+	 * @param searchQuery
+	 */
 	public void searchGoogle(String searchQuery) {
-		//logger.info("Find the google search box");
+		// wait for the Button to show on the page
 		waitForElementPresent(By.name("btnG"));
-		
+		// get the search box from the google page and send our search query
 		driver.findElement(By.name("q")).sendKeys(searchQuery);
-		//logger.info("Sent the search query to the box : " + searchQuery);
 		
 		try {
 			driver.findElement(By.name("btnG")).submit();
 		} catch (Exception e){
 			logger.info("btnG was not found so lets try btnG");
 		}
-		//logger.info("Submitted the form");
 	}
 
 	/**
 	 * This method will click on the first item in the google results
+	 * We do only click on results that are from the FD website
 	 */
 	public void clickFirstResult() throws Exception{
-		
 		try{
 			WebElement e = waitForElementIsClickable(By.xpath("//h3/a[contains(@href,'fd.nl')]"));
 			e.click();
-			//driver.findElement(By.xpath("//h3/a")).click();
 		} catch (Exception e){
 			logger.info("Element //h3/a was not found so we try the Thumb");
+			// Sometimes google doesn't show a Url but a thumb.
+			// So therefore we might have to use this but this is very rare
 			try{
 				waitForElementIsClickable(By.xpath("//div[contains(@class,'thumb')]"));
-				//driver.findElement(By.xpath("//div[contains(@class,'thumb')]")).click();
 			} catch (Exception ex){
 				logger.info("Element thumb was ALSO not found so something is really wrong!!");
 			}

@@ -1,6 +1,11 @@
+This program is completely legal as it just uses the Google search to access the free articles of the FD
+People can do this themselves manually but this program just makes it easier
 
-The Articles will be stored on D:/FD Articles/
+Important notes:
+- Don't change the directory structure!
+- 
 
-For better readability you can copy the fd.css into this location
+Useful notes:
+- If you want to get the articles again you can just remove the url from the database file. Removing the article
+itself doesn't do anything.
 
-Enjoy the free articles :)

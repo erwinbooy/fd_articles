@@ -1,5 +1,9 @@
 package utils;
 
+/**
+ * Simple dto to store article information
+ * @author Erwin
+ */
 public class Article {
 
 	private String articleUrl = null;
