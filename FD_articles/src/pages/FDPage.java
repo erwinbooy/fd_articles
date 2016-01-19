@@ -6,10 +6,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import automationFramework.AbstractPage;
-import utils.Article;
 
 public class FDPage extends AbstractPage {
 
@@ -41,15 +39,13 @@ public class FDPage extends AbstractPage {
 	 * 
 	 * @return
 	 */
-	public List<Article> getAllArticleUrlsFromPage() {
+	public List<String> getAllArticleUrlsFromPage() {
 		// Define our arraylist where we will store everything
-		ArrayList<Article> myArticles = new ArrayList<>();
+		ArrayList<String> myArticles = new ArrayList<>();
 
 		// Get the latest 5 articles and put them in the array
 		for (int i = 1; i < 19; i++) {
-			Article a = new Article();
-			a.setArticleUrl(getArticleUrl(i));
-			myArticles.add(a);
+			myArticles.add(getArticleUrl(i));
 		}
 
 		return myArticles;
@@ -63,9 +59,9 @@ public class FDPage extends AbstractPage {
 	 */
 	public String getArticleUrl(int articleNbr) {
 		// Get the first article
-		logger.info("Trying to find the Article URL from the page");
+		//logger.info("Trying to find the Article URL from the page");
 		String myArticleUrl = driver.findElement(By.xpath(xArticle + "[" + articleNbr + "]" + xArticleLink)).getAttribute("href");
-		logger.info("Got the Article URL from the page: " + myArticleUrl);
+		//logger.info("Got the Article URL from the page: " + myArticleUrl);
 		return myArticleUrl;
 	}
 
@@ -75,11 +71,12 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleText() {
-		logger.info("Trying to find the Article Text on the page");
+//		return driver.findElement(By.xpath(xArticle)).getAttribute("innnerHTML");
+		//logger.info("Trying to find the Article Text on the page");
 		WebElement myElement = waitForElementPresent(By.xpath(xArticle));
-		logger.info("Found the Article text on the page");
+		//logger.info("Found the Article text on the page");
 		String myText = myElement.getAttribute("innerHTML");
-		logger.info("Got the Article Text now");
+		//logger.info("Got the Article Text now");
 		return myText;
 	}
 
@@ -89,9 +86,9 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleTitle() {
-		logger.info("Trying to find the Article Title on the page");
+		//logger.info("Trying to find the Article Title on the page");
 		String myTitle = driver.findElement(By.xpath(xArticle + xArticleTitle)).getText();
-		logger.info("Got the Article Title now");
+		//logger.info("Got the Article Title now");
 		return myTitle;
 	}
 
@@ -101,11 +98,11 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleDate() {
-		logger.info("Trying to find the Article Date on the page");
+		//logger.info("Trying to find the Article Date on the page");
 		WebElement myElement = driver.findElement(By.xpath(xArticle + xArticleDate));
-		logger.info("Found the Article Date on the page");
+		//logger.info("Found the Article Date on the page");
 		String myDate = myElement.getText();
-		logger.info("Got the Article Date : " + myDate);
+		//logger.info("Got the Article Date : " + myDate);
 		return myDate;
 	}
 }

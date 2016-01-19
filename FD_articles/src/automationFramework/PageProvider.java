@@ -1,7 +1,7 @@
 package automationFramework;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pages.FDPage;
 import pages.GoogleSearchPage;
@@ -9,7 +9,7 @@ import pages.GoogleSearchPage;
 public class PageProvider {
 
 	private static WebDriver driver = null;
-	private static WebDriverWait waiter = null;
+	//private static WebDriverWait waiter = null;
 
 	/**
 	 * @param WebDriver

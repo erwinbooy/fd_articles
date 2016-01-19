@@ -2,10 +2,6 @@ package automationFramework;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 import junit.framework.TestCase;
 
@@ -19,8 +15,8 @@ public abstract class TestBase extends TestCase {
 	 * @throws Exception
 	 */
 	public void setUp() {
-		//myDriver = new FirefoxDriver();
-		myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
+		myDriver = new FirefoxDriver();
+		///myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
 		// myDriver.setJavascriptEnabled(true);
 		myDriver.manage().window().maximize();
 		// wait for the page to show

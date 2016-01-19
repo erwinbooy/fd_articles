@@ -3,11 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import automationFramework.AbstractPage;
-import utils.Article;
-import utils.ArticleWriter;
 
 public class GoogleSearchPage extends AbstractPage {
 
@@ -26,28 +23,37 @@ public class GoogleSearchPage extends AbstractPage {
 
 	// This method will use the input string and search Google
 	public void searchGoogle(String searchQuery) {
-		logger.info("Find the google search box");
+		//logger.info("Find the google search box");
+		waitForElementPresent(By.name("btnG"));
 		
-		Article a = new Article();
-		String test = driver.getPageSource();
-		a.setArticleText(test);
-		a.setArticleTitle("google_page");
-		ArticleWriter.writeArticle(a);
 		driver.findElement(By.name("q")).sendKeys(searchQuery);
-		//WebElement googleSearchBox = waitForElementPresent(By.id("lst-ib"));
-		logger.info("Found the google search box");
-		//googleSearchBox.sendKeys(searchQuery);
-		logger.info("Sent the search query to the box : " + searchQuery);
-		driver.findElement(By.id("sblsbb")).submit();
-		//WebElement googleSearchButton = driver.findElement(By.id("sblsbb"));
-		//googleSearchButton.submit();
+		//logger.info("Sent the search query to the box : " + searchQuery);
+		
+		try {
+			driver.findElement(By.name("btnG")).submit();
+		} catch (Exception e){
+			logger.info("btnG was not found so lets try btnG");
+		}
+		//logger.info("Submitted the form");
 	}
 
-	public void clickFirstResult() {
-		// We have to make sure the element is on the pagew
-		WebElement firstResult = waitForElementPresent(By.xpath("//h3/a"));
-		//String myText = firstResult.getText();
-		firstResult.click();
+	/**
+	 * This method will click on the first item in the google results
+	 */
+	public void clickFirstResult() throws Exception{
+		
+		try{
+			WebElement e = waitForElementIsClickable(By.xpath("//h3/a[contains(@href,'fd.nl')]"));
+			e.click();
+			//driver.findElement(By.xpath("//h3/a")).click();
+		} catch (Exception e){
+			logger.info("Element //h3/a was not found so we try the Thumb");
+			try{
+				waitForElementIsClickable(By.xpath("//div[contains(@class,'thumb')]"));
+				//driver.findElement(By.xpath("//div[contains(@class,'thumb')]")).click();
+			} catch (Exception ex){
+				logger.info("Element thumb was ALSO not found so something is really wrong!!");
+			}
+		}
 	}
-
 }
