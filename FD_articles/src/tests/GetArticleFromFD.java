@@ -1,8 +1,6 @@
 package tests;
 
 import java.awt.BorderLayout;
-import java.awt.Desktop;
-import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
@@ -21,6 +19,7 @@ import utils.ArticleDAO;
 public class GetArticleFromFD extends TestBase {
 	
 	private List<String> dbArticles = null;
+	private ArticleDAO articleDao = new ArticleDAO();
 	Log logger = null;
 
 	/**
@@ -30,13 +29,12 @@ public class GetArticleFromFD extends TestBase {
 	 */
 	@Test
 	public void test() throws InterruptedException {
-		showMessage(System.getProperty("user.dir"));
 		
 		logger = LogFactory.getLog(this.getClass());
 		showMessage("The program will start running now. It might take a while to scan FD for new articles");
 		
 		// Get all the current Articles from our database
-		dbArticles = ArticleDAO.getAllArticlesFromDatabase();
+		dbArticles = articleDao.getAllArticlesFromDatabase();
 		List<String> myArticleUrls = null;
 
 		// Go to the FD page and get all article Urls
@@ -69,7 +67,7 @@ public class GetArticleFromFD extends TestBase {
 					a.setArticleUrl(articleUrl);
 					a.setArticleText(fdPage.getArticleText());
 					a.setArticleTitle(fdPage.getArticleTitle().replace(":", ""));
-					ArticleDAO.writeArticle(a);
+					articleDao.writeArticle(a);
 					
 					newArticleCounter++;
 				} catch (Exception e){
@@ -78,7 +76,7 @@ public class GetArticleFromFD extends TestBase {
 				}
 			}
 		}
-		showMessage("The program ended and found : " + newArticleCounter + " new articles. You can view these articles in the folder D:/FD Articles/");
+		showMessage("The program ended and found : " + newArticleCounter + " new articles. You can view these articles in the folder :" + articleDao.getArticleDirectory());
 	}
 	
 //	/**
