@@ -71,11 +71,11 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public String getArticleText() {
-//		return driver.findElement(By.xpath(xArticle)).getAttribute("innnerHTML");
 		//logger.info("Trying to find the Article Text on the page");
-		WebElement myElement = waitForElementPresent(By.xpath(xArticle));
+		//String test = driver.getPageSource();
+		//WebElement myElement = waitForElementPresent(By.xpath(xArticle));
 		//logger.info("Found the Article text on the page");
-		String myText = myElement.getAttribute("innerHTML");
+		String myText = driver.getPageSource();
 		//logger.info("Got the Article Text now");
 		return myText;
 	}

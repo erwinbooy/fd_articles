@@ -66,7 +66,6 @@ public class GetArticleFromFD extends TestBase {
 					a.setArticleUrl(articleUrl);
 					a.setArticleText(fdPage.getArticleText());
 					a.setArticleTitle(fdPage.getArticleTitle().replace(":", ""));
-					a.setArticleDate(fdPage.getArticleDate());
 					ArticleWriter.writeArticle(a);
 					
 					counter++;

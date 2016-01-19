@@ -29,6 +29,7 @@ public class ArticleDatabase {
 			dbWriter = new BufferedWriter(new FileWriter(articleFile,true));
 			dbWriter.append(articleTitle);
 			dbWriter.append("\r\n");
+			log.info("Article added in Article DB");
 		} catch (IOException ioe){
 			log.error(ioe);
 		} finally {
