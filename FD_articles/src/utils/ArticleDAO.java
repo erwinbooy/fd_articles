@@ -55,7 +55,6 @@ public class ArticleDAO {
 			// When we wrote the article we also want to update the database accordingly
 			addArticleToDatabase(myArticle.getArticleUrl());
 		} catch (Exception e) {
-			// Do nothing?
 			logger.error("Something went wrong while trying to write our article " + e);
 		} finally {
 			try {
