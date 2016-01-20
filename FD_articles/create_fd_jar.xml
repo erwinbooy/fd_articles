@@ -7,7 +7,7 @@
     <property name="dir.workspace" value="D:/workspace"/>
     <property name="dir.jarfile" value="C:/Users/Erwin/Desktop"/>
     <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/FDArticles_2.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${dir.jarfile}/FDArticles.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="tests.MyRunner"/>
                 <attribute name="Class-Path" value="."/>

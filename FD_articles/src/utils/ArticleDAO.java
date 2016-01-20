@@ -18,7 +18,7 @@ public class ArticleDAO {
 	private static String running_dir = System.getProperty("user.dir");
 	private static String articleDirectory = null;
 	private static String articleDB = null;
-	private static String cssDirectory = "css/"; // relative path to the FD Articles
+	private static String cssDirectory = "..\\css\\"; // relative path to the FD Articles
 
 	private static Log logger = LogFactory.getLog("Article Writer");
 
@@ -46,7 +46,7 @@ public class ArticleDAO {
 		String fileName = myArticle.getArticleTitle();
 
 		try {
-			writer = new PrintWriter(articleDirectory + fileName + ".html");
+			writer = new PrintWriter(articleDirectory + fileName + ".html","UTF-8");
 			writer.write("<head><link rel='stylesheet' href='" + cssDirectory + "fd.css'></head><body>");
 			writer.write(myArticle.getArticleText());
 			writer.write("</body>");

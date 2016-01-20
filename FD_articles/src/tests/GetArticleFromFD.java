@@ -1,6 +1,8 @@
 package tests;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
@@ -55,7 +57,7 @@ public class GetArticleFromFD extends TestBase {
 			// We only want to search and store the articles once
 			if (!articleExistsInDB(articleUrl)){
 				//logger.info("New article found: " + articleUrl);
-				showMessage("New article found: " + articleUrl);
+				//showMessage("New article found: " + articleUrl);
 				
 				// We don't have the article yet so we are going to search for it on Google
 				googlePage.openPage();
@@ -66,10 +68,23 @@ public class GetArticleFromFD extends TestBase {
 					Article a = new Article();
 					a.setArticleUrl(articleUrl);
 					a.setArticleText(fdPage.getArticleText());
-					a.setArticleTitle(fdPage.getArticleTitle().replace(":", ""));
+					a.setArticleTitle(fdPage.getArticleTitle().replace(":", " "));
 					articleDao.writeArticle(a);
 					
+					try{
+						openFile(a.getArticleTitle());
+					} catch (Exception f){
+						showMessage("Couldn't open file " + a.getArticleTitle());
+					}
+					
 					newArticleCounter++;
+					if ((newArticleCounter == 5) || newArticleCounter == 10 || newArticleCounter == 15){
+						// Google only allows you to access 5 articles at once
+						// So we have to remove our cookies to get more
+						googlePage.driver.manage().deleteAllCookies();
+					}
+					
+					
 				} catch (Exception e){
 					showMessage("An unexpected error occurred !! Error is : " + e.toString());
 					logger.error(e);
@@ -77,6 +92,11 @@ public class GetArticleFromFD extends TestBase {
 			}
 		}
 		showMessage("The program ended and found : " + newArticleCounter + " new articles. You can view these articles in the folder :" + articleDao.getArticleDirectory());
+//		try{
+//			openDirectory(articleDao.getArticleDirectory());
+//		} catch (Exception d){
+//			showMessage(d.toString());
+//		}
 	}
 	
 //	/**
@@ -84,13 +104,15 @@ public class GetArticleFromFD extends TestBase {
 //	 * @throws Exception
 //	 */
 //    private void openDirectory(String myDir) throws Exception {
-//        // Horribly platform specific.
-//        String appData = System.getenv("APPDATA");
-//        File appDataDir = new File(appData);
-//        // Get a sub-directory named 'texture'
-//        File textureDir = new File(appDataDir, "texture");
-//        Desktop.getDesktop().open(textureDir);
+//        File appDataDir = new File(myDir);
+//        Desktop.getDesktop().open(appDataDir);
 //    }
+    
+    private void openFile(String myFileName) throws Exception {
+    	String articleDir = articleDao.getArticleDirectory();
+        File articleFile = new File(articleDir + myFileName + ".html");
+        Desktop.getDesktop().open(articleFile);
+    }
 	
 	/**
 	 * This method will show a window about some progress
