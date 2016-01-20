@@ -1,5 +1,6 @@
 package pages;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -63,7 +64,16 @@ public class FDPage extends AbstractPage {
 	 * @return String with the full page source of the article
 	 */
 	public String getArticleText() {
-		return driver.getPageSource();
+		String source = driver.getPageSource();
+		String decodedSource = null;
+		try{
+			decodedSource = URLDecoder.decode(source, "UTF-8");
+		} catch (Exception e){
+			logger.error("Problems when trying to encode the source: " + e.toString());
+			// If we can't decode it we just return the original source
+			decodedSource = source;
+		}
+		return source;
 	}
 
 	/**
