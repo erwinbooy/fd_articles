@@ -55,9 +55,10 @@ public class GetArticleFromFD extends TestBase {
 			// We first check if the article already exists. 
 			// Too many double searches on Google caused a block of the ip so
 			// We only want to search and store the articles once
-			if (!articleExistsInDB(articleUrl)){
-				//logger.info("New article found: " + articleUrl);
-				//showMessage("New article found: " + articleUrl);
+			// 
+			// But we always want to get the first article because that shows the updated articles
+			// So we always make sure we have the latest update of that article
+			if (newArticleCounter==0 || !articleExistsInDB(articleUrl)){
 				
 				// We don't have the article yet so we are going to search for it on Google
 				googlePage.openPage();
@@ -91,22 +92,8 @@ public class GetArticleFromFD extends TestBase {
 				}
 			}
 		}
-		showMessage("The program ended and found : " + newArticleCounter + " new articles. You can view these articles in the folder :" + articleDao.getArticleDirectory());
-//		try{
-//			openDirectory(articleDao.getArticleDirectory());
-//		} catch (Exception d){
-//			showMessage(d.toString());
-//		}
+		showMessage("The program ended and found : " + newArticleCounter + " new or updated articles. You can view these articles in the folder :" + articleDao.getArticleDirectory());
 	}
-	
-//	/**
-//	 * This method should open up our directory with FD Files
-//	 * @throws Exception
-//	 */
-//    private void openDirectory(String myDir) throws Exception {
-//        File appDataDir = new File(myDir);
-//        Desktop.getDesktop().open(appDataDir);
-//    }
     
     private void openFile(String myFileName) throws Exception {
     	String articleDir = articleDao.getArticleDirectory();

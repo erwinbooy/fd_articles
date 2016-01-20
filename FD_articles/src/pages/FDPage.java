@@ -73,7 +73,7 @@ public class FDPage extends AbstractPage {
 			// If we can't decode it we just return the original source
 			decodedSource = source;
 		}
-		return source;
+		return decodedSource;
 	}
 
 	/**
