@@ -69,7 +69,12 @@ public class GetArticleFromFD extends TestBase {
 					Article a = new Article();
 					a.setArticleUrl(articleUrl);
 					a.setArticleText(fdPage.getArticleText());
-					a.setArticleTitle(fdPage.getArticleTitle().replace(":", " "));
+					
+					// When we write the article we have to remove some possible characters which are not allowed by Windows in file names
+					String myTitle = fdPage.getArticleTitle();
+					myTitle = myTitle.replace(":", " ");
+					myTitle = myTitle.replace("?", "");
+					a.setArticleTitle(myTitle);
 					articleDao.writeArticle(a);
 					
 					try{
