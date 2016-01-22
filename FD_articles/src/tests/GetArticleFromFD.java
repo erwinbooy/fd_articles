@@ -74,6 +74,7 @@ public class GetArticleFromFD extends TestBase {
 					String myTitle = fdPage.getArticleTitle();
 					myTitle = myTitle.replace(":", " ");
 					myTitle = myTitle.replace("?", "");
+					myTitle = myTitle.replace("%", "");
 					a.setArticleTitle(myTitle);
 					articleDao.writeArticle(a);
 					
