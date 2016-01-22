@@ -33,7 +33,7 @@ public class GetArticleFromFD extends TestBase {
 	public void test() throws InterruptedException {
 		
 		logger = LogFactory.getLog(this.getClass());
-		showMessage("The program will start running now. It might take a while to scan FD for new articles");
+		//showMessage("The program will start running now. It might take a while to scan FD for new articles");
 		
 		// Get all the current Articles from our database
 		dbArticles = articleDao.getAllArticlesFromDatabase();
