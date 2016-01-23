@@ -76,8 +76,11 @@ public class GetArticleFromFD extends TestBase {
 					myTitle = myTitle.replace("?", "");
 					myTitle = myTitle.replace("%", "");
 					a.setArticleTitle(myTitle);
-					articleDao.writeArticle(a);
-					
+					// We only write it to the Database when we really have a new article
+					if (!articleExistsInDB(a.getArticleUrl())){
+						articleDao.writeArticle(a);
+					}
+
 					try{
 						openFile(a.getArticleTitle());
 					} catch (Exception f){
