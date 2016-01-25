@@ -81,6 +81,9 @@ public class GetArticleFromFD extends TestBase {
 					myTitle = myTitle.replace(":", " ");
 					myTitle = myTitle.replace("?", "");
 					myTitle = myTitle.replace("%", "");
+					myTitle = myTitle.replace("'", "");
+					myTitle = myTitle.replace(",", "");
+					myTitle = myTitle.replace(".", "");
 					a.setArticleTitle(myTitle);
 					// We only write it to the Database when we really have a new article
 					if (!articleExistsInDB(a.getArticleUrl())){
