@@ -65,6 +65,12 @@ public class GetArticleFromFD extends TestBase {
 				googlePage.searchGoogle(articleUrl);
 				try{
 					googlePage.clickFirstResult();
+					newArticleCounter++;
+					if ((newArticleCounter == 4) || newArticleCounter == 9 || newArticleCounter == 13){
+						// Google only allows you to access 5 articles at once
+						// So we have to remove our cookies to get more
+						googlePage.driver.manage().deleteAllCookies();
+					}
 					// Create the article, fill it and write it to file
 					Article a = new Article();
 					a.setArticleUrl(articleUrl);
@@ -86,15 +92,6 @@ public class GetArticleFromFD extends TestBase {
 					} catch (Exception f){
 						showMessage("Couldn't open file " + a.getArticleTitle());
 					}
-					
-					newArticleCounter++;
-					if ((newArticleCounter == 5) || newArticleCounter == 10 || newArticleCounter == 15){
-						// Google only allows you to access 5 articles at once
-						// So we have to remove our cookies to get more
-						googlePage.driver.manage().deleteAllCookies();
-					}
-					
-					
 				} catch (Exception e){
 					showMessage("An unexpected error occurred !! Error is : " + e.toString());
 					logger.error(e);
