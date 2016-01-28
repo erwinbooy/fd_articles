@@ -66,11 +66,6 @@ public class GetArticleFromFD extends TestBase {
 				try{
 					googlePage.clickFirstResult();
 					newArticleCounter++;
-					if ((newArticleCounter == 4) || newArticleCounter == 9 || newArticleCounter == 13){
-						// Google only allows you to access 5 articles at once
-						// So we have to remove our cookies to get more
-						googlePage.driver.manage().deleteAllCookies();
-					}
 					// Create the article, fill it and write it to file
 					Article a = new Article();
 					a.setArticleUrl(articleUrl);
@@ -88,6 +83,12 @@ public class GetArticleFromFD extends TestBase {
 					// We only write it to the Database when we really have a new article
 					if (!articleExistsInDB(a.getArticleUrl())){
 						articleDao.writeArticle(a);
+					}
+
+					if ((newArticleCounter == 4) || newArticleCounter == 9 || newArticleCounter == 14){
+						// Google only allows you to access 5 articles at once
+						// So we have to remove our cookies to get more
+						googlePage.driver.manage().deleteAllCookies();
 					}
 
 					try{
