@@ -50,6 +50,7 @@ public class GetArticleFromFD extends TestBase {
 		// Loop through all articles and find them in google and write them to a
 		Iterator<String> iter = myArticleUrls.iterator();
 		int newArticleCounter = 0;
+		int remainder = 0;
 		while (iter.hasNext()) {
 			String articleUrl = iter.next();
 			// We first check if the article already exists. 
@@ -63,6 +64,14 @@ public class GetArticleFromFD extends TestBase {
 				// We don't have the article yet so we are going to search for it on Google
 				googlePage.openPage();
 				googlePage.searchGoogle(articleUrl);
+				
+				newArticleCounter++;
+				remainder = newArticleCounter % 5;
+				if (remainder == 0){
+					// Google only allows you to access 5 articles at once
+					// So we have to remove our cookies to get more
+					googlePage.driver.manage().deleteAllCookies();
+				}
 				try{
 					googlePage.clickFirstResult();
 					// Create the article, fill it and write it to file
@@ -79,22 +88,17 @@ public class GetArticleFromFD extends TestBase {
 					myTitle = myTitle.replace(",", " ");
 					myTitle = myTitle.replace(".", " ");
 					a.setArticleTitle(myTitle);
-					// We only write it to the Database when we really have a new article
-					if (!articleExistsInDB(a.getArticleUrl())){
-						articleDao.writeArticle(a);
-					}
 
-					newArticleCounter++;
-					if ((newArticleCounter == 5) || newArticleCounter == 10 || newArticleCounter == 15){
-						// Google only allows you to access 5 articles at once
-						// So we have to remove our cookies to get more
-						googlePage.driver.manage().deleteAllCookies();
-					}
-
+					// Now we see if we can get the article
 					try{
 						openFile(a.getArticleTitle());
+						// We only write it to the Database when we really have a new article
+						if (!articleExistsInDB(a.getArticleUrl())){
+							articleDao.writeArticle(a);
+						}
 					} catch (Exception f){
-						showMessage("Couldn't open file " + a.getArticleTitle());
+						showMessage("An unexpected error occurred !! Error is : " + f.toString());
+						logger.error(f);
 					}
 				} catch (Exception e){
 					showMessage("An unexpected error occurred !! Error is : " + e.toString());

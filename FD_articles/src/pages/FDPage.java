@@ -69,7 +69,7 @@ public class FDPage extends AbstractPage {
 		try{
 			decodedSource = URLDecoder.decode(source, "UTF-8");
 		} catch (Exception e){
-			logger.error("Problems when trying to encode the source: " + e.toString());
+			logger.warn("Problems when trying to encode the source: " + e.toString());
 			// If we can't decode it we just return the original source
 			decodedSource = source;
 		}
