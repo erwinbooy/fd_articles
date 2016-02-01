@@ -91,11 +91,11 @@ public class GetArticleFromFD extends TestBase {
 
 					// Now we see if we can get the article
 					try{
-						openFile(a.getArticleTitle());
 						// We only write it to the Database when we really have a new article
 						if (!articleExistsInDB(a.getArticleUrl())){
 							articleDao.writeArticle(a);
 						}
+						openFile(a.getArticleTitle());
 					} catch (Exception f){
 						showMessage("An unexpected error occurred !! Error is : " + f.toString());
 						logger.error(f);
