@@ -65,7 +65,6 @@ public class GetArticleFromFD extends TestBase {
 				googlePage.searchGoogle(articleUrl);
 				try{
 					googlePage.clickFirstResult();
-					newArticleCounter++;
 					// Create the article, fill it and write it to file
 					Article a = new Article();
 					a.setArticleUrl(articleUrl);
@@ -74,21 +73,23 @@ public class GetArticleFromFD extends TestBase {
 					// When we write the article we have to remove some possible characters which are not allowed by Windows in file names
 					String myTitle = fdPage.getArticleTitle();
 					myTitle = myTitle.replace(":", " ");
-					myTitle = myTitle.replace("?", "");
-					myTitle = myTitle.replace("%", "");
-					myTitle = myTitle.replace("'", "");
-					myTitle = myTitle.replace(",", "");
-					myTitle = myTitle.replace(".", "");
+					myTitle = myTitle.replace("?", " ");
+					myTitle = myTitle.replace("%", " ");
+					myTitle = myTitle.replace("'", " ");
+					myTitle = myTitle.replace(",", " ");
+					myTitle = myTitle.replace(".", " ");
 					a.setArticleTitle(myTitle);
 					// We only write it to the Database when we really have a new article
 					if (!articleExistsInDB(a.getArticleUrl())){
 						articleDao.writeArticle(a);
 					}
 
-					if ((newArticleCounter == 4) || newArticleCounter == 9 || newArticleCounter == 14){
+					newArticleCounter++;
+					if ((newArticleCounter == 5) || newArticleCounter == 10 || newArticleCounter == 15){
 						// Google only allows you to access 5 articles at once
 						// So we have to remove our cookies to get more
 						googlePage.driver.manage().deleteAllCookies();
+						googlePage.driver.manage().wait(1000);
 					}
 
 					try{
