@@ -89,7 +89,6 @@ public class GetArticleFromFD extends TestBase {
 						// Google only allows you to access 5 articles at once
 						// So we have to remove our cookies to get more
 						googlePage.driver.manage().deleteAllCookies();
-						googlePage.driver.manage().wait(1000);
 					}
 
 					try{
