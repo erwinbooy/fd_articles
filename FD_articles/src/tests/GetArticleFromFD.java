@@ -66,12 +66,6 @@ public class GetArticleFromFD extends TestBase {
 				googlePage.searchGoogle(articleUrl);
 				
 				newArticleCounter++;
-				remainder = newArticleCounter % 5;
-				if (remainder == 0){
-					// Google only allows you to access 5 articles at once
-					// So we have to remove our cookies to get more
-					googlePage.driver.manage().deleteAllCookies();
-				}
 				try{
 					googlePage.clickFirstResult();
 					// Create the article, fill it and write it to file
@@ -96,6 +90,7 @@ public class GetArticleFromFD extends TestBase {
 							articleDao.writeArticle(a);
 						}
 						openFile(a.getArticleTitle());
+						googlePage.driver.manage().deleteAllCookies();
 					} catch (Exception f){
 						showMessage("An unexpected error occurred !! Error is : " + f.toString());
 						logger.error(f);
