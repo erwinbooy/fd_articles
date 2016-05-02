@@ -32,11 +32,22 @@ public abstract class AbstractPage {
 	}
 
 	/**
+	 * This method can be used to check if something exists on the page
+	 * If it exists the WebElement will be returned
+	 * 
+	 * @param myXPath
+	 * @return WebElement
+	 */
+	public WebElement findElementOnPage(By locator) {
+		return driver.findElement(locator);
+	}
+
+	/**
 	 * This method will be a safe method to get an element because it always
 	 * waits for it to be clickable
 	 * 
 	 * @param myXPath
-	 * @return
+	 * @return WebElement
 	 */
 	public WebElement waitForElementIsClickable(By locator) {
 		return wait.until(ExpectedConditions.elementToBeClickable((locator)));
@@ -51,5 +62,13 @@ public abstract class AbstractPage {
 	 */
 	public WebElement waitForElementPresent(By locator) {
 		return wait.until(ExpectedConditions.presenceOfElementLocated((locator)));
+	}
+	
+
+	/**
+	 * Can be used for debugging problems. This returns the html that is being used currently
+	 */
+	public String getPageHtml(){
+		return driver.getPageSource();
 	}
 }

@@ -41,19 +41,30 @@ public class GoogleSearchPage extends AbstractPage {
 	/**
 	 * This method will click on the first item in the google results
 	 * We do only click on results that are from the FD website
+	 * The problem is that we get multiple search results sometimes so we have to take care of that
+	 * Therefore there are a few try catch parts because we never know in advance how the page looks
 	 */
 	public void clickFirstResult() throws Exception{
+		// First we wait for the page to have been built
+		waitForElementPresent(By.xpath("//a[contains(.,'Voorwaarden')]"));
+		
+		WebElement we = null;
+		// Then we check if there is a Thumb nail showing and click on it
 		try{
-			WebElement e = waitForElementIsClickable(By.xpath("//h3/a[contains(@href,'fd.nl')]"));
-			e.click();
-		} catch (Exception e){
-			logger.info("Element //h3/a was not found so we try the Thumb");
-			// Sometimes google doesn't show a Url but a thumb.
-			// So therefore we might have to use this but this is very rare
+			we = findElementOnPage(By.xpath("//img[contains(@class,'th')]"));
+			we.click();
+		} catch(Exception ex){
+			// We assume that there is a H3 tag but this is not always the case
 			try{
-				waitForElementIsClickable(By.xpath("//div[contains(@class,'thumb')]"));
-			} catch (Exception ex){
-				logger.info("Element thumb was ALSO not found so something is really wrong!!");
+				// Obiously there was no thumbnail so lets just click on the link
+				we = waitForElementIsClickable(By.xpath("//h3/a[contains(@href,'fd.nl')]"));
+				we.click();
+				logger.info(getPageHtml());
+			} catch (Exception e){
+				// Then lets hope for something else to lead us to the FD
+				we = waitForElementIsClickable(By.xpath("//div[contains(@class,'_I2')]//a[contains(@href,'fd.nl')]"));
+				we.click();
+				logger.info(getPageHtml());
 			}
 		}
 	}
