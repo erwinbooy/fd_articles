@@ -100,6 +100,6 @@ public class DeveloperProfile2 extends AbstractDeveloperProfile{
 	 * @return true/false
 	 */
 	public boolean hasCorrectSideBarItemsNS(DeveloperUser user, NavigationSoftwarePage myPage){
-		return super.hasCorrectSidebarItemsNS(user, myPage, true, true, false, false, false);
+		return super.hasCorrectSidebarItemsNS(user, myPage, true, false, false, false, false);
 	}
 }

@@ -13,6 +13,14 @@ import users.DeveloperProfile1;
 import users.DeveloperProfile2;
 import users.DeveloperUser;
 
+
+/**
+ * Class to read the file with test data
+ * The file itself is excluded from the repository for security reasons
+ * 
+ * @author Erwin
+ *
+ */
 public class TestUserTool {
 
 	// The program runs from the /bin/ so that is our user.dir
