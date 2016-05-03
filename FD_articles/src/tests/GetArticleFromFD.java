@@ -50,7 +50,6 @@ public class GetArticleFromFD extends TestBase {
 		// Loop through all articles and find them in google and write them to a
 		Iterator<String> iter = myArticleUrls.iterator();
 		int newArticleCounter = 0;
-		int remainder = 0;
 		while (iter.hasNext()) {
 			String articleUrl = iter.next();
 			// We first check if the article already exists. 
