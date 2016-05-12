@@ -109,9 +109,10 @@ public class ArticleDAO {
 			try{
 				dbReader.close();
 			} catch (Exception e){
-				logger.warn("Exception while trying to close the file reader");
+				logger.error("Exception while trying to close the file reader");
 			}
 		}
+		logger.info("returning articles");
 		return articles;
 	}
 

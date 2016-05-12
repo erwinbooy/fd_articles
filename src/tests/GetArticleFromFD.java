@@ -5,6 +5,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.openqa.selenium.Cookie;
 
 import automationFramework.PageProvider;
 import automationFramework.TestBase;
@@ -92,14 +94,26 @@ public class GetArticleFromFD extends TestBase {
 							articleDao.writeArticle(a);
 						}
 						openFile(a.getArticleTitle());
-						googlePage.driver.manage().deleteAllCookies();
+						
+						Set<Cookie> myCookies = googlePage.driver.manage().getCookies();
+						Iterator<Cookie> c = myCookies.iterator();
+						while (c.hasNext()){
+							Cookie cookie = c.next();
+							// We want to delete most cookies but not the cookieconsent one
+							if(cookie.getName().equals("cookieconsent")){
+								googlePage.driver.manage().deleteAllCookies();
+								googlePage.driver.manage().addCookie(cookie);
+								break;
+							}
+							//logger.error(cookie.getDomain() + " with name " + cookie.getName());
+						}
 					} catch (Exception f){
-						showMessage("An unexpected error occurred !! Error is : " + f.toString());
-						logger.error(f);
+//						showMessage("An unexpected error occurred !! Error is : " + f.toString());
+						logger.error(fdPage.driver.getPageSource());
 					}
 				} catch (Exception e){
-					showMessage("An unexpected error occurred !! Error is : " + e.toString());
-					logger.error(e);
+//					showMessage("An unexpected error occurred !! Error is : " + e.toString());
+					logger.error(googlePage.driver.getPageSource());
 				}
 			}
 		}

@@ -28,14 +28,14 @@ public class GoogleSearchPage extends AbstractPage {
 	 */
 	public void searchGoogle(String searchQuery) {
 		// wait for the Button to show on the page
-		waitForElementPresent(By.name("btnG"));
+		WebElement button = waitForElementPresent(By.name("btnG"));
 		// get the search box from the google page and send our search query
 		driver.findElement(By.name("q")).sendKeys(searchQuery);
-		
 		try {
-			driver.findElement(By.name("btnG")).submit();
+			button.click();
 		} catch (Exception e){
-			logger.info("btnG was not found so lets try btnG");
+			logger.error(driver.getPageSource());
+			logger.error("btnG was also not found so something is really wrong");
 		}
 	}
 
@@ -60,12 +60,12 @@ public class GoogleSearchPage extends AbstractPage {
 				// Obiously there was no thumbnail so lets just click on the link
 				we = waitForElementIsClickable(By.xpath("//h3/a[contains(@href,'fd.nl')]"));
 				we.click();
-				logger.info(getPageHtml());
 			} catch (Exception e){
 				// Then lets hope for something else to lead us to the FD
+				logger.error(getPageHtml());
+				logger.error("GoogleSearch:: last try to get the link");
 				we = waitForElementIsClickable(By.xpath("//div[contains(@class,'_I2')]//a[contains(@href,'fd.nl')]"));
 				we.click();
-				logger.info(getPageHtml());
 			}
 		}
 	}
