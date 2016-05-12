@@ -27,15 +27,19 @@ public class GoogleSearchPage extends AbstractPage {
 	 * @param searchQuery
 	 */
 	public void searchGoogle(String searchQuery) {
-		// wait for the Button to show on the page
-		WebElement button = waitForElementPresent(By.name("btnG"));
-		// get the search box from the google page and send our search query
 		driver.findElement(By.name("q")).sendKeys(searchQuery);
 		try {
-			button.click();
+			// wait for the Button to show on the page
+			findElementOnPage(By.name("btnG")).click();
 		} catch (Exception e){
-			logger.error(driver.getPageSource());
-			logger.error("btnG was also not found so something is really wrong");
+			// Lets try btnK then
+			try{
+				findElementOnPage(By.name("btnK")).click();
+			} catch (Exception ex){
+				logger.error("btnG and btnK were not found so something is really wrong. Printed page is below");
+				logger.error(driver.getPageSource());
+				throw e;
+			}
 		}
 	}
 
@@ -62,10 +66,14 @@ public class GoogleSearchPage extends AbstractPage {
 				we.click();
 			} catch (Exception e){
 				// Then lets hope for something else to lead us to the FD
-				logger.error(getPageHtml());
-				logger.error("GoogleSearch:: last try to get the link");
-				we = waitForElementIsClickable(By.xpath("//div[contains(@class,'_I2')]//a[contains(@href,'fd.nl')]"));
-				we.click();
+				try{
+					we = waitForElementIsClickable(By.xpath("//div[contains(@class,'_I2')]//a[contains(@href,'fd.nl')]"));
+					we.click();
+				} catch (Exception last){
+					logger.error("GoogleSearch:: we could not find the link to FD anywhere. Page source is below");
+					logger.error(getPageHtml());
+					throw last;
+				}
 			}
 		}
 	}
