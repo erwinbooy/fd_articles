@@ -1,7 +1,6 @@
 package automationFramework;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +17,7 @@ public abstract class AbstractPage {
 
 	public WebDriver driver = null;
 	public WebDriverWait wait = null;
-	public Log logger = null;
+	public Logger logger = null;
 
 	/**
 	 * Constructor with WebDriver
@@ -28,7 +27,7 @@ public abstract class AbstractPage {
 	public AbstractPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, 5, 1);
-		logger = LogFactory.getLog(this.getClass());
+		logger = Logger.getLogger(this.getClass());
 	}
 
 	/**
