@@ -1,22 +1,29 @@
 package automationFramework;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import junit.framework.TestCase;
 
 public abstract class TestBase extends TestCase {
 
-	private FirefoxDriver myDriver;
+	private ChromeDriver myDriver;
+	public Logger logger = null;
+
 
 	/**
 	 * setUp method which is used by the Test framework
 	 */
 	public void setUp() {
-		myDriver = new FirefoxDriver();
-		//myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
-		myDriver.manage().window().maximize();
-		//myDriver.setJavascriptEnabled(true);
+		System.setProperty("webdriver.chrome.driver", "C:/Users/Erwin/AppData/Local/Google/Chrome/Application/chromedriver.exe");
+
+		try{
+			myDriver = new ChromeDriver();
+		} catch (Exception e){
+			logger.error(e);
+		}
+//		myDriver.manage().window().maximize();
 		PageProvider.initialize(myDriver);
 	}
 
