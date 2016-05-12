@@ -4,7 +4,6 @@
 	<classpathentry kind="lib" path="selenium-server-standalone-2.53.0.jar"/>
 	<classpathentry kind="lib" path="htmlunit-driver-standalone-2.20.jar"/>
 	<classpathentry kind="var" path="Log4J"/>
-	<classpathentry kind="var" path="JRE_LIB"/>
 	<classpathentry kind="lib" path="C:/log4j"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
