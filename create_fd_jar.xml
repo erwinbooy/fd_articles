@@ -13,7 +13,9 @@
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="${dir.buildfile}/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/selenium-server-standalone-2.48.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/selenium-server-standalone-2.53.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/htmlunit-driver-standalone-2.20.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Program Files/Java/apache-log4j-1.2.17/log4j-1.2.17.jar"/>
         </jar>
     </target>
 </project>
