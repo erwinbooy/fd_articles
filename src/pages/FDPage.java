@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import automationFramework.AbstractPage;
 
@@ -32,8 +33,10 @@ public class FDPage extends AbstractPage {
 	 * Open our page
 	 */
 	public void OpenPage() {
+		((HtmlUnitDriver)driver).setJavascriptEnabled(true);
 		driver.get(myPageUrl);
 		clickCookieMessage();
+		((HtmlUnitDriver)driver).setJavascriptEnabled(false);
 	}
 
 	/**
