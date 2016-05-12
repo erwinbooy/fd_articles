@@ -1,22 +1,23 @@
 package automationFramework;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 import junit.framework.TestCase;
 
 public abstract class TestBase extends TestCase {
 
-	private FirefoxDriver myDriver;
+	private HtmlUnitDriver myDriver;
 
 	/**
 	 * setUp method which is used by the Test framework
 	 */
 	public void setUp() {
-		myDriver = new FirefoxDriver();
-		//myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
+		myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
 		myDriver.manage().window().maximize();
-		//myDriver.setJavascriptEnabled(true);
+		myDriver.setJavascriptEnabled(true);
 		PageProvider.initialize(myDriver);
 	}
 
