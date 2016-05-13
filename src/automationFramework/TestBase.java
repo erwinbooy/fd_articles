@@ -2,13 +2,13 @@ package automationFramework;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import junit.framework.TestCase;
 
 public abstract class TestBase extends TestCase {
 
-	private ChromeDriver myDriver;
+	private InternetExplorerDriver myDriver;
 	public Logger logger = null;
 
 
@@ -16,14 +16,13 @@ public abstract class TestBase extends TestCase {
 	 * setUp method which is used by the Test framework
 	 */
 	public void setUp() {
-		System.setProperty("webdriver.chrome.driver", "C:/Users/Erwin/AppData/Local/Google/Chrome/Application/chromedriver.exe");
-
+		System.setProperty("webdriver.ie.driver", "C:/Users/Erwin/AppData/Local/Microsoft/Internet Explorer/IEDriverServer.exe");
 		try{
-			myDriver = new ChromeDriver();
+			myDriver = new InternetExplorerDriver();
 		} catch (Exception e){
 			logger.error(e);
 		}
-//		myDriver.manage().window().maximize();
+		myDriver.manage().window().maximize();
 		PageProvider.initialize(myDriver);
 	}
 
