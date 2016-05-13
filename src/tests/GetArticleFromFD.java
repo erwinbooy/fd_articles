@@ -117,7 +117,7 @@ public class GetArticleFromFD extends TestBase {
 				}
 			}
 		}
-		showMessage("The program ended and found : " + newArticleCounter + " new or updated articles. You can view these articles in the folder :" + articleDao.getArticleDirectory());
+		//showMessage("The program ended and found : " + newArticleCounter + " new or updated articles. You can view these articles in the folder :" + articleDao.getArticleDirectory());
 	}
     
     private void openFile(String myFileName) throws Exception {
