@@ -95,7 +95,7 @@ public class ArticleDAO {
 	 * @return List<String> with articleUrls
 	 */
 	public List<String> getAllArticlesFromDatabase(){
-		ArrayList<String> articles = new ArrayList<>();
+		ArrayList<String> articles = new ArrayList<String>();
 		BufferedReader dbReader = null;
 		String line = null;
 		try{

@@ -15,7 +15,7 @@ public abstract class TestBase extends TestCase {
 	 * setUp method which is used by the Test framework
 	 */
 	public void setUp() {
-		myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
+		myDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
 		myDriver.manage().window().maximize();
 		//myDriver.setJavascriptEnabled(true);
 		PageProvider.initialize(myDriver);

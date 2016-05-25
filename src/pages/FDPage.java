@@ -45,7 +45,7 @@ public class FDPage extends AbstractPage {
 	 * @return
 	 */
 	public List<String> getAllArticleUrlsFromPage() {
-		ArrayList<String> myArticles = new ArrayList<>();
+		ArrayList<String> myArticles = new ArrayList<String>();
 
 		// Get all the articleUrls from the page and put them in the array
 		for (int i = 1; i < 20; i++) {

@@ -26,7 +26,7 @@ public class GoogleSearchPage extends AbstractPage {
 	 * 
 	 * @param searchQuery
 	 */
-	public void searchGoogle(String searchQuery) {
+	public void searchGoogle(String searchQuery){
 		driver.findElement(By.name("q")).sendKeys(searchQuery);
 		try {
 			// wait for the Button to show on the page
@@ -38,7 +38,6 @@ public class GoogleSearchPage extends AbstractPage {
 			} catch (Exception ex){
 				logger.error("btnG and btnK were not found so something is really wrong. Printed page is below");
 				logger.error(driver.getPageSource());
-				throw e;
 			}
 		}
 	}
